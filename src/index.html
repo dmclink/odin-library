@@ -10,6 +10,8 @@
 </head>
 
 <body>
+  <h1>Library</h1>
+  <h2>Add to library</h2>
   <button class="open-dialog-btn" id="open-dialog-btn">Add New Book</button>
   <dialog class="dialog" id="dialog">
     <h2>Input New Book Details</h2>
@@ -22,22 +24,23 @@
         <input type="text" name="new-author" id="new-author" required>
       </label>
       <label for="new-pages" class="form-label">Pages
-        <input type="range" name="new-pages" id="new-pages" min="100" max="2000" step="100" required>
+        <input type="range" name="new-pages" id="new-pages" min="100" max="2000" step="100" value="1000" required>
         ~<output id="new-pages-output" name="new-pages-output" for="new-pages">1000</output>
       </label>
       <fieldset>
         <legend>Have you read this book?</legend>
         <label for="new-read">Yes
-          <input type="radio" name="new-read" value="true" id="new-read" selected>
+          <input type="radio" name="new-read" value="read" id="new-read" selected required>
         </label>
         <label for="new-not-read">No
-          <input type="radio" name="new-read" value="false" id="new-not-read">
+          <input type="radio" name="new-read" value="not read" id="new-not-read" required>
         </label>
       </fieldset>
       <button type="submit" id="form-submit-btn" class="form-submit-btn">Add To Library</button>
     </form>
   </dialog>
 
+  <h2>Books</h2>
   <div class="books" id="books">
     <!-- books added here via js -->
   </div>

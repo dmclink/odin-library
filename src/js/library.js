@@ -34,12 +34,68 @@ function addBookToLibrary() {
 	myLibrary.push(newBook);
 }
 
+/** Creates a book card div element from given Book data.
+ *
+ * Example Element:
+ * <div class="book-card">
+ *  <h3 class="book-card__title">Murder on the Orient Express</h3>
+ *  <p class="book-card__author">by Agatha Christie</p>
+ *  <p class"book-card__pages">256 pages</p>
+ *  <p class="book-card__read">not read</p>
+ * </div>
+ *
+ * @param {Book} book - the Book data to use to create the new book element
+ * @returns {HTMLElement} - the newly created book card
+ */
+function createBookEl(book) {
+	const bookCard = document.createElement('div');
+	bookCard.classList.add('book-card');
+
+	const title = document.createElement('h3');
+	title.textContent = book.title;
+	title.classList.add('book-card__title');
+
+	const author = document.createElement('p');
+	author.textContent = `by ${book.author}`;
+	author.classList.add('book-card__author');
+
+	const pages = document.createElement('p');
+	pages.textContent = `${book.pages} pages`;
+	pages.classList.add('book-card__pages');
+
+	const read = document.createElement('p');
+	read.textContent = book.read;
+	read.classList.add('book-card__read');
+
+	bookCard.appendChild(title);
+	bookCard.appendChild(author);
+	bookCard.appendChild(pages);
+	bookCard.appendChild(read);
+
+	return bookCard;
+}
+
+/** Creates a book element for every book in myLibrary and populates the #books HTML list */
 function displayBooks() {
-	// TODO: grab some element from the DOM and fill it in with all the books in `myLibrary`
+	const bookCardsEl = document.querySelector('#books');
+	bookCardsEl.replaceChildren();
+	myLibrary.forEach((book) => {
+		const bookEl = createBookEl(book);
+		bookCardsEl.appendChild(bookEl);
+	});
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+	displayBooks();
+
+	const form = document.querySelector('#add-new-form');
 	const dialog = document.querySelector('#dialog');
+
+	dialog.addEventListener('close', () => {
+		form.reset();
+		form.querySelector('#new-read').checked = true;
+	});
+
 	const openDialogBtn = document.querySelector('#open-dialog-btn');
 	openDialogBtn.addEventListener('click', () => {
 		dialog.showModal();
@@ -58,6 +114,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	document.querySelector('#form-submit-btn').addEventListener('click', (e) => {
 		e.preventDefault();
+		if (!form.checkValidity()) {
+			form.reportValidity();
+			return;
+		}
 		addBookToLibrary();
+		displayBooks();
+		form.reset();
+		form.querySelector('#new-read').checked = true;
 	});
 });
