@@ -10,7 +10,37 @@
 </head>
 
 <body>
+  <button class="open-dialog-btn" id="open-dialog-btn">Add New Book</button>
+  <dialog class="dialog" id="dialog">
+    <h2>Input New Book Details</h2>
+    <button id="close-dialog-btn" class="close-dialog-btn">X</button>
+    <form class="add-new-form" id="add-new-form">
+      <label for="new-title" class="form-label">Title
+        <input type="text" name="new-title" id="new-title">
+      </label>
+      <label for="new-author" class="form-label">Author
+        <input type="text" name="new-author" id="new-author">
+      </label>
+      <label for="new-pages" class="form-label">Pages
+        <input type="range" name="new-pages" id="new-pages" min="100" max="2000" step="100">
+        ~<output id="new-pages-output" name="new-pages-output" for="new-pages">1000</output>
+      </label>
+      <fieldset>
+        <legend>Have you read this book?</legend>
+        <label for="new-read">Yes
+          <input type="radio" name="new-read" value="true" id="new-read">
+        </label>
+        <label for="new-not-read">No
+          <input type="radio" name="new-read" value="false" id="new-not-read">
+        </label>
+      </fieldset>
+      <button type="submit" id="form-submit-btn" class="form-submit-btn">Add To Library</button>
+    </form>
+  </dialog>
 
+  <div class="books" id="books">
+    <!-- books added here via js -->
+  </div>
 </body>
 
 </html>
