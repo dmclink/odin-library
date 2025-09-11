@@ -16,19 +16,19 @@
     <button id="close-dialog-btn" class="close-dialog-btn">X</button>
     <form class="add-new-form" id="add-new-form">
       <label for="new-title" class="form-label">Title
-        <input type="text" name="new-title" id="new-title">
+        <input type="text" name="new-title" id="new-title" required>
       </label>
       <label for="new-author" class="form-label">Author
-        <input type="text" name="new-author" id="new-author">
+        <input type="text" name="new-author" id="new-author" required>
       </label>
       <label for="new-pages" class="form-label">Pages
-        <input type="range" name="new-pages" id="new-pages" min="100" max="2000" step="100">
+        <input type="range" name="new-pages" id="new-pages" min="100" max="2000" step="100" required>
         ~<output id="new-pages-output" name="new-pages-output" for="new-pages">1000</output>
       </label>
       <fieldset>
         <legend>Have you read this book?</legend>
         <label for="new-read">Yes
-          <input type="radio" name="new-read" value="true" id="new-read">
+          <input type="radio" name="new-read" value="true" id="new-read" selected>
         </label>
         <label for="new-not-read">No
           <input type="radio" name="new-read" value="false" id="new-not-read">
