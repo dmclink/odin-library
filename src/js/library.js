@@ -1,5 +1,21 @@
 const myLibrary = [];
 
+function createTrashcanSvg() {
+	const svgNS = 'http://www.w3.org/2000/svg';
+
+	const trashcan = document.createElementNS(svgNS, 'svg');
+	trashcan.setAttribute('viewbox', '0 0 24 24');
+
+	const pathData =
+		'M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z';
+	const trashcanPath = document.createElementNS(svgNS, 'path');
+	trashcanPath.setAttribute('d', pathData);
+
+	trashcan.appendChild(trashcanPath);
+
+	return trashcan;
+}
+
 /** Book represents a book the user has submitted to their library.
  *
  * @param {string} title - the title of the book to add
@@ -32,6 +48,14 @@ function addBookToLibrary() {
 	);
 
 	myLibrary.push(newBook);
+}
+
+/** Removes book with id from myLibrary array and deletes its index from indexes
+ *
+ */
+function removeBookFromLibrary(id) {
+	const idx = myLibrary.findIndex((book) => book.id === id);
+	myLibrary.splice(idx, 1);
 }
 
 /** Creates a book card div element from given Book data.
@@ -67,7 +91,19 @@ function createBookEl(book) {
 	read.textContent = book.read;
 	read.classList.add('book-card__read');
 
+	const deleteButton = document.createElement('button');
+	deleteButton.classList.add('book-card__delete');
+	const deleteSvg = createTrashcanSvg();
+	deleteButton.appendChild(deleteSvg);
+	deleteButton.addEventListener('click', () => {
+		console.log('myLibrary before:', myLibrary);
+		deleteButton.parentElement.remove();
+		removeBookFromLibrary(book.id);
+		console.log('myLibrary after:', myLibrary);
+	});
+
 	bookCard.appendChild(title);
+	bookCard.appendChild(deleteButton);
 	bookCard.appendChild(author);
 	bookCard.appendChild(pages);
 	bookCard.appendChild(read);
@@ -122,5 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		displayBooks();
 		form.reset();
 		form.querySelector('#new-read').checked = true;
+		dialog.close();
 	});
 });
