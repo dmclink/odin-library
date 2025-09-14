@@ -5,6 +5,8 @@ function createTrashcanSvg() {
 
 	const trashcan = document.createElementNS(svgNS, 'svg');
 	trashcan.setAttribute('viewbox', '0 0 24 24');
+	trashcan.setAttribute('width', '24');
+	trashcan.setAttribute('height', '24');
 
 	const pathData =
 		'M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z';
@@ -92,8 +94,9 @@ function createBookEl(book) {
 	read.classList.add('book-card__read');
 
 	const deleteButton = document.createElement('button');
-	deleteButton.classList.add('book-card__delete');
+	deleteButton.classList.add('book-card__delete-btn');
 	const deleteSvg = createTrashcanSvg();
+	deleteSvg.classList.add('book-card__delete-svg');
 	deleteButton.appendChild(deleteSvg);
 	deleteButton.addEventListener('click', () => {
 		console.log('myLibrary before:', myLibrary);
