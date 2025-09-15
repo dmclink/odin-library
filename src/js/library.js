@@ -1,4 +1,17 @@
-const myLibrary = [];
+let myLibrary = [];
+
+const libkey = 'mylib';
+
+function getBooksLocalStorage() {
+	const myLibJSON = localStorage.getItem(libkey);
+	if (myLibJSON !== null) {
+		myLibrary = JSON.parse(localStorage.getItem(libkey));
+	}
+}
+
+function setBooksLocalStorage() {
+	localStorage.setItem(libkey, JSON.stringify(myLibrary));
+}
 
 function createTrashcanSvg() {
 	const svgNS = 'http://www.w3.org/2000/svg';
@@ -50,6 +63,7 @@ function addBookToLibrary() {
 	);
 
 	myLibrary.push(newBook);
+	setBooksLocalStorage();
 }
 
 /** Removes book with id from myLibrary array and deletes its index from indexes
@@ -58,6 +72,7 @@ function addBookToLibrary() {
 function removeBookFromLibrary(id) {
 	const idx = myLibrary.findIndex((book) => book.id === id);
 	myLibrary.splice(idx, 1);
+	setBooksLocalStorage();
 }
 
 /** Creates a book card div element from given Book data.
@@ -70,7 +85,7 @@ function removeBookFromLibrary(id) {
  *  </div>
  *  <p class="book-card__author">by <span class="capitalize">Agatha Christie<span></p>
  *  <p class"book-card__pages">256 pages</p>
- *  <p class="book-card__read">not read</p>
+ *  <p class="book-card__read" data-read="false">not read</p>
  * </div>
  *
  * @param {Book} book - the Book data to use to create the new book element
@@ -120,6 +135,10 @@ function createBookEl(book) {
 		read.setAttribute('data-read', 'false');
 	}
 	read.classList.add('book-card__read');
+	read.addEventListener('click', () => {
+		// TODO: add read toggle
+		console.log('read book');
+	});
 
 	bookCardHeader.appendChild(title);
 	bookCardHeader.appendChild(deleteButton);
@@ -143,6 +162,7 @@ function displayBooks() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+	getBooksLocalStorage();
 	displayBooks();
 
 	const form = document.querySelector('#dialog__form');

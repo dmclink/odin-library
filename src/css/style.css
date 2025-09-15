@@ -278,6 +278,7 @@ h1 {
 .book-card__read {
 	width: max-content;
 	padding-inline: 0.6rem;
+	cursor: pointer;
 
 	&[data-read='false'] {
 		background-color: rgb(94, 94, 59);
