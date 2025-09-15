@@ -151,6 +151,10 @@ button {
 	grid-column: span 2;
 }
 
+.capitalize {
+	text-transform: capitalize;
+}
+
 /* HEADER */
 .header {
 	background: linear-gradient(to top, #3c3c48, #595963 15%, #333340);
@@ -229,4 +233,56 @@ h1 {
 
 .dialog__radio-group {
 	padding-inline: 1rem;
+}
+
+/* BOOKCARDS */
+.books__hdg {
+	padding: 1rem;
+}
+.books {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+	gap: 1rem;
+	padding: 1rem;
+}
+
+.book-card {
+	background-color: #333338;
+	padding: 1.6rem;
+	border-radius: 10px;
+	display: flex;
+	flex-flow: column;
+	box-shadow: 3px 3px 3px rgb(54, 54, 57), inset 1px 1px 3px rgb(191, 191, 191);
+}
+
+.book-card__delete-btn {
+	padding: 0;
+	border: none;
+	background-color: transparent;
+
+	svg {
+		fill: rgb(180, 60, 60);
+	}
+}
+
+.book-card__header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.book-card__author,
+.book-card__pages {
+	margin-bottom: 0.5rem;
+}
+
+.book-card__read {
+	width: max-content;
+	padding-inline: 0.6rem;
+
+	&[data-read='false'] {
+		background-color: rgb(94, 94, 59);
+	}
+	&[data-read='true'] {
+		background-color: rgb(48, 78, 48);
+	}
 }

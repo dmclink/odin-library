@@ -64,8 +64,11 @@ function removeBookFromLibrary(id) {
  *
  * Example Element:
  * <div class="book-card">
- *  <h3 class="book-card__title">Murder on the Orient Express</h3>
- *  <p class="book-card__author">by Agatha Christie</p>
+ *  <div class="book-card__header">
+ *    <h3 class="book-card__title capitalize">Murder on the Orient Express</h3>
+ *    <button class="book-card__delete-btn"><svg>trashcan</svg></button>
+ *  </div>
+ *  <p class="book-card__author">by <span class="capitalize">Agatha Christie<span></p>
  *  <p class"book-card__pages">256 pages</p>
  *  <p class="book-card__read">not read</p>
  * </div>
@@ -77,21 +80,12 @@ function createBookEl(book) {
 	const bookCard = document.createElement('div');
 	bookCard.classList.add('book-card');
 
+	const bookCardHeader = document.createElement('div');
+	bookCardHeader.classList.add('book-card__header');
+
 	const title = document.createElement('h3');
 	title.textContent = book.title;
-	title.classList.add('book-card__title');
-
-	const author = document.createElement('p');
-	author.textContent = `by ${book.author}`;
-	author.classList.add('book-card__author');
-
-	const pages = document.createElement('p');
-	pages.textContent = `${book.pages} pages`;
-	pages.classList.add('book-card__pages');
-
-	const read = document.createElement('p');
-	read.textContent = book.read;
-	read.classList.add('book-card__read');
+	title.classList.add('book-card__title', 'capitalize');
 
 	const deleteButton = document.createElement('button');
 	deleteButton.classList.add('book-card__delete-btn');
@@ -100,13 +94,37 @@ function createBookEl(book) {
 	deleteButton.appendChild(deleteSvg);
 	deleteButton.addEventListener('click', () => {
 		console.log('myLibrary before:', myLibrary);
-		deleteButton.parentElement.remove();
+		deleteButton.parentElement.parentElement.remove();
 		removeBookFromLibrary(book.id);
 		console.log('myLibrary after:', myLibrary);
 	});
 
-	bookCard.appendChild(title);
-	bookCard.appendChild(deleteButton);
+	const author = document.createElement('p');
+	const attr = document.createTextNode('by ');
+	const auth = document.createElement('span');
+	auth.textContent = book.author;
+	auth.classList.add('capitalize');
+	author.appendChild(attr);
+	author.appendChild(auth);
+	author.classList.add('book-card__author');
+
+	const pages = document.createElement('p');
+	pages.textContent = `${book.pages} pages`;
+	pages.classList.add('book-card__pages');
+
+	const read = document.createElement('p');
+	read.textContent = book.read;
+	if (book.read === 'read') {
+		read.setAttribute('data-read', 'true');
+	} else {
+		read.setAttribute('data-read', 'false');
+	}
+	read.classList.add('book-card__read');
+
+	bookCardHeader.appendChild(title);
+	bookCardHeader.appendChild(deleteButton);
+
+	bookCard.appendChild(bookCardHeader);
 	bookCard.appendChild(author);
 	bookCard.appendChild(pages);
 	bookCard.appendChild(read);
