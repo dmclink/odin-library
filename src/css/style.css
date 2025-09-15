@@ -259,6 +259,8 @@ h1 {
 	padding: 0;
 	border: none;
 	background-color: transparent;
+	flex-shrink: 0;
+	align-self: start;
 
 	svg {
 		fill: rgb(180, 60, 60);
@@ -279,6 +281,7 @@ h1 {
 	width: max-content;
 	padding-inline: 0.6rem;
 	cursor: pointer;
+	margin-top: auto;
 
 	&[data-read='false'] {
 		background-color: rgb(94, 94, 59);

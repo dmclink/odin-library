@@ -66,11 +66,21 @@ function addBookToLibrary() {
 	setBooksLocalStorage();
 }
 
+/** Searches myLibrary for the book with the same same id as input.
+ * ASSUME: book exists in library
+ *
+ * @param {string} id - id of book to search
+ * @returns {number} - the index in myLibrary where book with id was found
+ */
+function findBookIndex(id) {
+	return myLibrary.findIndex((book) => book.id === id);
+}
+
 /** Removes book with id from myLibrary array and deletes its index from indexes
  *
  */
 function removeBookFromLibrary(id) {
-	const idx = myLibrary.findIndex((book) => book.id === id);
+	const idx = findBookIndex(id);
 	myLibrary.splice(idx, 1);
 	setBooksLocalStorage();
 }
@@ -128,16 +138,23 @@ function createBookEl(book) {
 	pages.classList.add('book-card__pages');
 
 	const read = document.createElement('p');
+	const readAttr = 'data-read';
 	read.textContent = book.read;
 	if (book.read === 'read') {
-		read.setAttribute('data-read', 'true');
+		read.setAttribute(readAttr, 'true');
 	} else {
-		read.setAttribute('data-read', 'false');
+		read.setAttribute(readAttr, 'false');
 	}
 	read.classList.add('book-card__read');
 	read.addEventListener('click', () => {
-		// TODO: add read toggle
-		console.log('read book');
+		const isTrueSet = read.getAttribute(readAttr) === 'true';
+		const newReadValue = !isTrueSet;
+		read.setAttribute(readAttr, String(newReadValue));
+		const idx = findBookIndex(book.id);
+		const newReadText = newReadValue ? 'read' : 'not read';
+		myLibrary[idx].read = newReadText;
+		read.textContent = newReadText;
+		setBooksLocalStorage();
 	});
 
 	bookCardHeader.appendChild(title);
