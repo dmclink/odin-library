@@ -40,7 +40,7 @@ function Book(title, author, pages, read) {
 /** Creates a new book from form inputs and appends it to myLibrary array.
  */
 function addBookToLibrary() {
-	const form = document.querySelector('#add-new-form');
+	const form = document.querySelector('#dialog__form');
 	const formData = new FormData(form);
 	const newBook = new Book(
 		formData.get('new-title'),
@@ -127,7 +127,7 @@ function displayBooks() {
 document.addEventListener('DOMContentLoaded', () => {
 	displayBooks();
 
-	const form = document.querySelector('#add-new-form');
+	const form = document.querySelector('#dialog__form');
 	const dialog = document.querySelector('#dialog');
 
 	dialog.addEventListener('close', () => {
