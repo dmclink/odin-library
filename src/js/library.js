@@ -26,10 +26,14 @@ class Library {
 		}
 	}
 
+	/** Converts myLibrary to JSON and stores it in local storage. */
 	setBooksLocalStorage() {
 		localStorage.setItem(this.#libkey, JSON.stringify(this.#myLibrary));
 	}
 
+	/** Creates trashcan svg and returns it
+	 *
+	 * @returns {SVGElement} - the created trashcan svg */
 	static createTrashcanSvg() {
 		const svgNS = 'http://www.w3.org/2000/svg';
 
