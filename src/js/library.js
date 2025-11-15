@@ -210,7 +210,24 @@ document.addEventListener('DOMContentLoaded', () => {
 		.querySelector('#form-submit-btn')
 		.addEventListener('click', (e) => {
 			e.preventDefault();
+			const authorInput = form.querySelector('#new-author');
+			const titleInput = form.querySelector('#new-title');
+			const pagesInput = form.querySelector('#new-pages');
+
+			authorInput.setCustomValidity('');
+
 			if (!form.checkValidity()) {
+				if (authorInput.validity.valueMissing) {
+					authorInput.setCustomValidity(
+						'missing an author name here',
+					);
+				}
+				if (authorInput.validity.tooShort) {
+					authorInput.setCustomValidity(
+						"nobody's name is just one letter...right?",
+					);
+				}
+
 				form.reportValidity();
 				return;
 			}
