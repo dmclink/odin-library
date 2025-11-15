@@ -10,7 +10,8 @@
 }
 
 html {
-	font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+	font-family:
+		system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
 		'Apple Color Emoji', 'Segoe UI Emoji';
 	box-sizing: border-box;
 	-webkit-text-size-adjust: 100%;
@@ -61,7 +62,8 @@ code,
 kbd,
 samp,
 pre {
-	font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo,
+	font-family:
+		ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo,
 		monospace;
 	font-size: 1em;
 }
@@ -252,7 +254,9 @@ h1 {
 	border-radius: 10px;
 	display: flex;
 	flex-flow: column;
-	box-shadow: 3px 3px 3px rgb(54, 54, 57), inset 1px 1px 3px rgb(191, 191, 191);
+	box-shadow:
+		3px 3px 3px rgb(54, 54, 57),
+		inset 1px 1px 3px rgb(191, 191, 191);
 }
 
 .book-card__delete-btn {

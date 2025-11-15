@@ -60,7 +60,7 @@ class Library {
 			formData.get('new-title'),
 			formData.get('new-author'),
 			formData.get('new-pages'),
-			formData.get('new-read')
+			formData.get('new-read'),
 		);
 
 		this.#myLibrary.push(newBook);
@@ -206,16 +206,18 @@ document.addEventListener('DOMContentLoaded', () => {
 		pagesOutput.value = pagesRange.value;
 	});
 
-	document.querySelector('#form-submit-btn').addEventListener('click', (e) => {
-		e.preventDefault();
-		if (!form.checkValidity()) {
-			form.reportValidity();
-			return;
-		}
-		myLibrary.addBookToLibrary();
-		myLibrary.displayBooks();
-		form.reset();
-		form.querySelector('#new-read').checked = true;
-		dialog.close();
-	});
+	document
+		.querySelector('#form-submit-btn')
+		.addEventListener('click', (e) => {
+			e.preventDefault();
+			if (!form.checkValidity()) {
+				form.reportValidity();
+				return;
+			}
+			myLibrary.addBookToLibrary();
+			myLibrary.displayBooks();
+			form.reset();
+			form.querySelector('#new-read').checked = true;
+			dialog.close();
+		});
 });
